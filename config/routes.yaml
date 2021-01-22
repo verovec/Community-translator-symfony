@@ -1,0 +1,3 @@
+index:
+   path: /
+   controller: App\Controller\ProjectController::get_all_project

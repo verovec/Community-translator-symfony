@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="{{ absolute_url(asset('style/style.css')) }}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <title>{% block title %}Crowdin{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <div id="row">
+            <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+                <div class="col-3">
+                    <img id="logo" class="col-12" src="{{ absolute_url(asset('images/base/logo-api-redoc.png')) }}"/>
+                </div>
+                <div class="col-6 col-offset-3">
+                    <div class="row">
+                        {% if app.user %}
+                            <a href="{{ path('app_logout') }}" class="div-menu">
+                                <div class="col-3" style="text-align: center;">
+                                    <p style="text-decoration: none; ">logout</p>
+                                </div>
+                            </a>
+                            <a href="{{ path('get_profile', {id_user : app.user.id })}}" class="div-menu">
+                                <div class="col-3" style="text-align: center;">
+                                    <p style="text-decoration: none; ">profile</p>
+                                </div>
+                            </a>
+                            <a href="{{ path('all_projects') }}" class="div-menu">
+                                <div class="col-3" style="text-align: center;">
+                                    <p style="text-decoration: none; ">projects</p>
+                                </div>
+                            </a>
+                        {% else %}
+                            <a href="{{ path('app_login') }}" class="div-menu">
+                                <div class="col-3" style="text-align: center;">
+                                    <p style="text-decoration: none; ">login</p>
+                                </div>
+                            </a>
+                            <a href="{{ path('user_registration') }}" class="div-menu">
+                                <div class="col-3" style="text-align: center;">
+                                    <p style="text-decoration: none; ">register</p>
+                                </div>
+                            </a>
+                            <a href="{{ path('all_projects') }}" class="div-menu">
+                                <div class="col-3" style="text-align: center;">
+                                    <p style="text-decoration: none; ">projects</p>
+                                </div>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+        </div>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

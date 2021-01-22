@@ -1,0 +1,12 @@
+#logo {
+    height: 100px;
+}
+
+.div-menu {
+    border-left: solid 5px white;
+    margin: auto;
+    height: 50px;
+    font-size: 18px;
+    text-transform: uppercase;
+    line-height: 50px;
+}

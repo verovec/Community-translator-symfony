@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProjectController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+<div class="row" style=" background-color: #e3f2fd;">
+    <div class="container">
+        <div class="row" style="height:100%;">
+            <div class="row" style="height:100%;">
+                <div class="col-6">
+                    <img src="https://d2srrzh48sp2nh.cloudfront.net/c4954160/images/main/main-in-oneplace-bg@1x.png">
+                </div>
+                <div class="col-5" style="margin-top: 10%; margin-left: 5%;">
+                    <h2>All of your multilingual content in one place</h2>
+                    <p>Crowdin brings people, content, and technology together. It allows you to streamline the localization process and keep your workflow agile.</p>
+                </div>
+            </div>
+            {% if app.user %}
+            <div class="example-wrapper" style="margin-bottom: 30px;margin-top: 30px;" >
+                <a href="{{ path('add_project') }}" >
+                    <button type="button" class="btn btn-success" style="margin-left:25%;">add project</button>
+                </a>
+            </div>            
+        {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="example-wrapper" style="border-top: solid 1 px white;">
+    <div class="row" style="margin-bottom: 30px;margin-top: 30px;">
+        <h2>All projects</h2>
+    </div>
+    <div class="row">
+            {% for project in projects %}
+                <div class="col-lg-3 col-md-4 col-6" style="margin-bottom: 30px;">
+                    <div style="border: solid 2px;">
+                        <a href="/project/{{ project.id }}" class="d-block mb-4 h-100">
+                            <p><b>{{ project.name }}</b></p>
+                            <p style="font-size: 12px;">lang: {{ project.lang }}</p>
+                        </a>
+                        <p style="font-size: 10px;">by <a href="/profile/{{ project.user.id }}">{{ project.user.firstname }} {{project.user.lastname}}</a></p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

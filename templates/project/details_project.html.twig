@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProjectController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <div class="row">
+        <h1><b>{{ project.name }}</b></h1><br>
+        
+        {% if edit_button %}
+            <a href="{{ path('edit_user_project', {project_id : project.id }) }}" class="div-menu">
+                <button type="button" class="btn btn-info">edit</button>
+            </a>
+        {% endif %}
+        {% if delete_button %}
+            <a href="{{ path('delete_project', {id : project.id }) }}" class="div-menu">
+                <button type="button" class="btn btn-danger">delete</button>
+            </a>
+        {% endif %}
+    </div>
+    <p style="font-size: 13px;">lang : {{ project.lang }}</p>
+    {% if form_spec %}
+        {{ form(form_spec) }}
+    {% endif %}
+    {% for elem in project.source %}
+            <div class="row" style="font-size: 25px;">
+                <hr>
+                <p>{{ elem.getContent }}</p>
+                <hr>
+            </div>
+            {% for trans in elem.translations %}
+                <div class="row">
+                    <p style="font-size:10px;">{{ trans.content }}</p>
+                </div>
+                <div class="row">
+                    <p style="font-size:8px;">lang : {{ trans.lang }}</p>
+                </div>
+                <div class="row">
+                    <a href="/profile/{{ trans.user.id }}">
+                        <p style="font-size:8px;">{{ trans.user.firstname }} {{ trans.user.lastname }}</p>
+                    </a>
+                </div>
+                <br>
+            {% endfor %}
+            {% if form == TRUE %}
+                <form action="/translation/add/source_id={{ elem.id }}" method="POST" style="margin-bottom: 50px;">
+                    <input type="text" placeholder="content" name="content"/>
+                    <input type="text" placeholder="lang" name="lang" size="3"/>
+                    <input type="submit" value="send" class="btn btn-outline-info">
+                </form>
+            {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}
